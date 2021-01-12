@@ -64,9 +64,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Client.cs" />
     <Compile Include="Assets\Scripts\NBody.cs" />
     <Compile Include="Assets\Scripts\NBodyCuda.cs" />
+    <Compile Include="Assets\Scripts\NBodyCuda_Updated.cs" />
+    <Compile Include="Assets\Scripts\NBodyDistributed.cs" />
+    <Compile Include="Assets\Scripts\Reader.cs" />
     <Compile Include="Assets\Scripts\Vector3D.cs" />
+    <Compile Include="Assets\Scripts\Writer.cs" />
     <Compile Include="Assets\Scripts\camera\CameraMouseInput.cs" />
     <Compile Include="Assets\Scripts\camera\FocusPoint.cs" />
     <Compile Include="Assets\Scripts\camera\OrbitCamera.cs" />

@@ -8,7 +8,8 @@ using UnityEngine;
 
 public class NBodyCuda : MonoBehaviour
 {
-    [DllImport(@"D:\Faculty\PDPCourse\NBody\x64\Debug\NBody.dll", EntryPoint = "calculatePosition")]
+    [DllImport(@"D:\Faculty\PDPCourse\NBody\x64\Debug\NBody.dll", 
+        EntryPoint = "calculatePosition")]
     private static extern Vector3[] calculatePosition(
         Vector3[] position, 
         Vector3[] velocity, 
@@ -79,8 +80,8 @@ public class NBodyCuda : MonoBehaviour
             );
         }
 
-        //velocities[0] = new Vector3(0, 0, 0);
-        //masses[0] = 100;
+        velocities[0] = new Vector3(0, 0, 0);
+        masses[0] = 100;
 
         for (int i = 0; i < numberOfBodies; i++)
         {
@@ -114,6 +115,15 @@ public class NBodyCuda : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space))
             run = !run;
+
+        this.transform.position = new Vector3(
+            positions.Select(position => position.x).Average(),
+            positions.Select(position => position.y).Average(),
+            positions.Select(position => position.z).Average()
+        );
+
+        //this.transform.position = positions[0];
+
     }
 
     private void ComputeAccelerations()

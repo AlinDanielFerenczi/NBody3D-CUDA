@@ -86,8 +86,8 @@ __global__ void initAccelerationsKernel(Vector3D* accelerations)
 
 cudaError_t calculatePosition(Vector3D* positions, Vector3D* velocities, Vector3D* accelerations, float* masses, float timeStep, int size)
 {
-    FILE* fptr;
-    fptr = fopen("fileopen.txt", "w");
+    //FILE* fptr;
+    //fptr = fopen("fileopen.txt", "w");
     Vector3D* dev_positions = 0;
     Vector3D* dev_velocities = 0;
     Vector3D* dev_accelerations = 0;
@@ -167,12 +167,14 @@ cudaError_t calculatePosition(Vector3D* positions, Vector3D* velocities, Vector3
         fprintf(stderr, "cudaMemcpy failed!");
         goto Error;
     }
+
     dim3 block(32, 32);
     dim3 grid;
     grid.x = (size + block.x - 1) / block.x;
     grid.y = (size + block.y - 1) / block.y;
     dim3 simpleGrid;
     simpleGrid = (size + block.x - 1) / block.x;
+
     calculateVelocityKernel <<<simpleGrid, block>>> (dev_velocities, dev_accelerations, timeStep);
     calculatePositionKernel <<<simpleGrid, block>>> (dev_positions, dev_velocities, timeStep);
     initAccelerationsKernel <<<simpleGrid, block>>> (dev_accelerations);
